@@ -10,4 +10,3 @@ def ping_pong():
         'status': 'success',
         'message': 'pong!'
     })
-    

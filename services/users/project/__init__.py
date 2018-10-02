@@ -1,11 +1,12 @@
 # services/users/project/__init__.py
 
 import os
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # instantiate th db
 db = SQLAlchemy()
+
 
 def create_app(script_info=None):
 
@@ -26,6 +27,6 @@ def create_app(script_info=None):
     # shell context for flask cli
     @app.shell_context_processor
     def ctx():
-        return {'app': app, 'db':db}
+        return {'app': app, 'db': db}
 
     return app

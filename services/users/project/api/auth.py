@@ -8,6 +8,7 @@ from project import db, bcrypt
 
 auth_blueprint = Blueprint('auth', __name__)
 
+
 @auth_blueprint.route('/auth/register', methods=['POST'])
 def register_user():
     # get post data
@@ -48,6 +49,7 @@ def register_user():
         db.session.rollback()
         return jsonify(response_object), 400
 
+
 @auth_blueprint.route('/auth/login', methods=['POST'])
 def login_user():
     # get post data
@@ -77,6 +79,7 @@ def login_user():
         response_object['message'] = 'Try again.'
         return jsonify(response_object), 500
 
+
 @auth_blueprint.route('/auth/logout', methods=['GET'])
 def logout_user():
     # get auth token
@@ -97,6 +100,7 @@ def logout_user():
             return jsonify(response_object), 401
     else:
         return jsonify(response_object), 403
+
 
 @auth_blueprint.route('/auth/status', methods=['GET'])
 def get_user_status():

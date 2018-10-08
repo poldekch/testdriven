@@ -3,8 +3,8 @@
 
 import json
 
-from project import db
-from project.api.models import User
+# from project import db
+# from project.api.models import User
 from project.tests.base import BaseTestCase
 from project.tests.utils import add_user
 
@@ -250,4 +250,3 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertTrue(
                 data['message'] == 'Invalid token. Please log in again.')
             self.assertEqual(response.status_code, 401)
-            

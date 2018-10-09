@@ -50,7 +50,7 @@ class UserStatus extends Component {
           <li><strong>Email:</strong> {this.state.email}</li>
           <li><strong>Username:</strong> {this.state.username}</li>
           <li><strong>Active:</strong> {this.state.active}</li>
-          <li><string>Admin:</string> {this.state.admin}</li>
+          <li><strong>Admin:</strong> {this.state.admin}</li>
         </ul>
       </div>
     )

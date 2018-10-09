@@ -86,6 +86,7 @@ class TestUserService(BaseTestCase):
                 }),
                 content_type='application/json'
             )
+            token = json.loads(resp_login.data.decode())['auth_token']
             response = self.client.post(
                 '/users',
                 data=json.dumps({}),

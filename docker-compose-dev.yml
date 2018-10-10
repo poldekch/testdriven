@@ -1,6 +1,7 @@
 version: '3.6'
 
 services:
+
   users:
     build:
       context: ./services/users
@@ -27,17 +28,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
-  nginx:
-    build:
-      context: ./services/nginx
-      dockerfile: Dockerfile-dev
-    restart: always
-    ports:
-      - 80:80
-    depends_on:
-      - users
-      - client
 
   client:
     build:
@@ -66,3 +56,14 @@ services:
       - URL=swagger.json
     depends_on:
       - users
+
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile-dev
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - users
+      - client

@@ -1,10 +1,12 @@
 # services/users/project/config.py
 
+
 import os
 
 
 class BaseConfig:
     """Base configuration"""
+    DEBUG=False
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -30,10 +32,12 @@ class TestingConfig(BaseConfig):
     TOKEN_EXPIRATION_DAYS = 0
     TOKEN_EXPIRATION_SECONDS = 3
 
+
 class StagingConfig(BaseConfig):
     """Staging configuration"""
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-    
+
+
 class ProductionConfig(BaseConfig):
     """Production configuration"""
     DEBUG = False

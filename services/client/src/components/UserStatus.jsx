@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 class UserStatus extends Component {
   constructor (props) {
     super(props);
@@ -14,7 +15,9 @@ class UserStatus extends Component {
     };
   };
   componentDidMount() {
-    this.getUserStatus();
+    if (this.props.isAuthenticated) {
+      this.getUserStatus();
+    };
   };
   getUserStatus(event) {
     const options = {

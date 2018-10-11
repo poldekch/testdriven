@@ -123,7 +123,7 @@ class TestUserService(BaseTestCase):
                 '/auth/login',
                 data=json.dumps({
                     'email': 'test@test.com',
-                    'password': 'greaterthaneight'
+                    'password': 'test'
                 }),
                 content_type='application/json'
             )

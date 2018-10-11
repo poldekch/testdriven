@@ -16,7 +16,7 @@ users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 def index():
     if request.method == 'POST':
         username = request.form['username']
-        email = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         db.session.add(User(
             username=username, email=email, password=password))

@@ -6,7 +6,7 @@ import os
 
 class BaseConfig:
     """Base configuration"""
-    DEBUG=False
+    DEBUG = False
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -40,5 +40,4 @@ class StagingConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     """Production configuration"""
-    DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-import { registerFormRules, loginFormRules } from '.form-rules.js';
-import FormError from './FormError.jsx';
+import { registerFormRules, loginFormRules } from './form-rules.js';
+import FormErrors from './FormErrors.jsx';
+
 
 class Form extends Component {
   constructor (props) {
@@ -18,7 +19,6 @@ class Form extends Component {
       loginFormRules: loginFormRules,
       formRules: '',
       valid: false,
-      }
     };
     this.handleUserFormSubmit = this.handleUserFormSubmit.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -42,6 +42,7 @@ class Form extends Component {
     const obj = this.state.formData;
     obj[event.target.name] = event.target.value;
     this.setState(obj);
+    this.validateForm();
   };
   handleUserFormSubmit(event) {
     event.preventDefault();
@@ -59,7 +60,7 @@ class Form extends Component {
       this.clearForm();
       this.props.loginUser(res.data.auth_token);
     })
-    .catch((err) => { .catch((err) => {
+    .catch((err) => {
       // new
       if (formType === 'Login') {
         this.props.createMessage('User does not exist.', 'danger');
@@ -123,7 +124,6 @@ class Form extends Component {
     // eslint-disable-next-line
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-});
   };
   render() {
     if (this.props.isAuthenticated) {
@@ -138,10 +138,10 @@ class Form extends Component {
       <div>
         <h1 className="title is-1">{this.props.formType}</h1>
         <hr/><br/>
-          <FormErrors
-            formType={this.props.formType}
-            formRules={formRules}
-          />
+        <FormErrors
+          formType={this.props.formType}
+          formRules={formRules}
+        />
         <form onSubmit={(event) => this.handleUserFormSubmit(event)}>
           {this.props.formType === 'Register' &&
             <div className="field">

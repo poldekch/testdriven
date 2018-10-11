@@ -34,7 +34,7 @@ class TestUserModel(BaseTestCase):
     def test_add_user_duplicate_email(self):
         add_user('justatest', 'test@test.com', 'greaterthaneight')
         duplicate_user = User(
-            username='justanothertest',
+            username='justatest2',
             email='test@test.com',
             password='greaterthaneight',
         )

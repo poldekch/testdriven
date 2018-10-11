@@ -1,12 +1,13 @@
 # services/users/project/tests/test_users.py
 
+
 import json
 import unittest
 
-from project.tests.base import BaseTestCase
-from project.tests.utils import add_user
 from project import db
 from project.api.models import User
+from project.tests.base import BaseTestCase
+from project.tests.utils import add_user
 
 
 class TestUserService(BaseTestCase):
@@ -23,6 +24,7 @@ class TestUserService(BaseTestCase):
     def test_add_user(self):
         """Ensure a new user can be added to the database."""
         add_user('test', 'test@test.com', 'test')
+        # update user
         user = User.query.filter_by(email='test@test.com').first()
         user.admin = True
         db.session.commit()
@@ -54,6 +56,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_invalid_json(self):
         """Ensure error is thrown if the JSON object is empty."""
         add_user('test', 'test@test.com', 'test')
+        # update user
         user = User.query.filter_by(email='test@test.com').first()
         user.admin = True
         db.session.commit()
@@ -83,6 +86,7 @@ class TestUserService(BaseTestCase):
         Ensure error is thrown if the JSON object does not have a username key.
         """
         add_user('test', 'test@test.com', 'test')
+        # update user
         user = User.query.filter_by(email='test@test.com').first()
         user.admin = True
         db.session.commit()
@@ -110,6 +114,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_duplicate_email(self):
         """Ensure error is thrown if the email already exists."""
         add_user('test', 'test@test.com', 'test')
+        # update user
         user = User.query.filter_by(email='test@test.com').first()
         user.admin = True
         db.session.commit()
@@ -118,7 +123,7 @@ class TestUserService(BaseTestCase):
                 '/auth/login',
                 data=json.dumps({
                     'email': 'test@test.com',
-                    'password': 'test'
+                    'password': 'greaterthaneight'
                 }),
                 content_type='application/json'
             )
@@ -137,8 +142,7 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'michael',
-                    'email': 'michael@mherman.org',
-                    'password': 'greaterthaneight'
+                    'email': 'michael@mherman.org'
                 }),
                 content_type='application/json',
                 headers={'Authorization': f'Bearer {token}'}
@@ -243,6 +247,7 @@ class TestUserService(BaseTestCase):
         does not have a password key.
         """
         add_user('test', 'test@test.com', 'test')
+        # update user
         user = User.query.filter_by(email='test@test.com').first()
         user.admin = True
         db.session.commit()
@@ -264,10 +269,10 @@ class TestUserService(BaseTestCase):
                 content_type='application/json',
                 headers={'Authorization': f'Bearer {token}'}
             )
-        data = json.loads(response.data.decode())
-        self.assertEqual(response.status_code, 400)
-        self.assertIn('Invalid payload.', data['message'])
-        self.assertIn('fail', data['status'])
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 400)
+            self.assertIn('Invalid payload.', data['message'])
+            self.assertIn('fail', data['status'])
 
     def test_add_user_inactive(self):
         add_user('test', 'test@test.com', 'test')

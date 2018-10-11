@@ -3,15 +3,12 @@
 
 import json
 
-# from project import db
-# from project.api.models import User
-from project.tests.base import BaseTestCase
-from project.tests.utils import add_user
-
 from flask import current_app
 
 from project import db
 from project.api.models import User
+from project.tests.base import BaseTestCase
+from project.tests.utils import add_user
 
 
 class TestAuthBlueprint(BaseTestCase):
@@ -240,7 +237,7 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertTrue(data['data'] is not None)
             self.assertTrue(data['data']['username'] == 'test')
             self.assertTrue(data['data']['email'] == 'test@test.com')
-            self.assertTrue(data['data']['active'] is True)
+            self.assertTrue(data['data']['active'])
             self.assertFalse(data['data']['admin'])
             self.assertEqual(response.status_code, 200)
 
